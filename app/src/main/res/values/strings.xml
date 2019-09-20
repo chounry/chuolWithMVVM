@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Chuol</string>
+    <string name="drawer_open">Opened</string>
+    <string name="drawer_close">Closed</string>
+
+    <string name="house_type_promt">Choose House Type</string>
+    <string-array name="house_type">
+        <item>Bungalow</item>
+        <item>Castle</item>
+        <item>Caravan</item>
+    </string-array>
+
+    <string name="city_promt">Choose City</string>
+    <string-array name="cities">
+        <item>Siem Reap</item>
+        <item>Phnom Penh</item>
+        <item>Kampong Charm</item>
+    </string-array>
+
+    <string name="currency_promt">Choose Currency</string>
+    <string-array name="currencies">
+        <item>Dollar</item>
+        <item>Riel</item>
+    </string-array>
+
+    <string name="duration_promt">Choose Currency</string>
+    <string-array name="duration">
+        <item>15 </item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
+
+    <string name="sale_rent_promt">Choose Currency</string>
+    <string name="sign_up_txt">Sign up</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string-array name="for_sale_rent">
+        <item>For Sale</item>
+        <item>For Rent</item>
+    </string-array>
+
+    <string-array name="service_items">
+        <item>Free Wifi</item>
+        <item>Parking Space Available</item>
+    </string-array>
+</resources>

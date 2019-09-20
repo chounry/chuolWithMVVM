@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/app_bar_for_login_regi">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/login_signup_tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorPrimary"
+            android:elevation="10dp"
+            app:tabIndicatorColor="#fff"
+            app:tabSelectedTextColor="#fff"
+            app:tabTextColor="#DBDBDB">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/login_tab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Login" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/sign_up_tab"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Sign Up" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPage_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
+</layout>
