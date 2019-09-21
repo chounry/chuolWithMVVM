@@ -1,5 +1,6 @@
 package com.example.chuolmvvm.viewmodel;
 
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.databinding.BaseObservable;
@@ -10,6 +11,15 @@ import io.reactivex.disposables.Disposable;
 public abstract class AbsBaseViewModel extends BaseObservable {
 
     private CompositeDisposable mCompositeDisposable;
+    private Context mContext;
+
+    public AbsBaseViewModel(Context context) {
+        mContext = context;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
 
     public void onDestroy(){}
 

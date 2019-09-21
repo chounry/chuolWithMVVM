@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.adapter.LoginRegisterViewPagerAdapter;
 import com.example.chuolmvvm.databinding.ActivityLoginRegisterBinding;
+import com.example.chuolmvvm.ui.fragment.SignUpFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginRegisterActivity extends AbsBaseActivityBinding<ActivityLoginRegisterBinding> {
@@ -29,11 +30,17 @@ public class LoginRegisterActivity extends AbsBaseActivityBinding<ActivityLoginR
         initTabLayout();
     }
 
-    private void initTabLayout(){
+    private void initTabLayout() {
         final TabLayout tableLayout = getBinding().appBarInclude.contentLoginRegister.loginSignupTabLayout;
         final ViewPager viewPager = getBinding().appBarInclude.contentLoginRegister.viewPageHome;
 
-        mLoginRegisterViewPagerAdapter = new LoginRegisterViewPagerAdapter(getSupportFragmentManager(),tableLayout.getTabCount());
+        mLoginRegisterViewPagerAdapter = new LoginRegisterViewPagerAdapter(getSupportFragmentManager(), tableLayout.getTabCount());
+        mLoginRegisterViewPagerAdapter.setSignUpListener(new SignUpFragment.SignUpFragmentListener() {
+            @Override
+            public void onSignUpComplete() {
+                finish();
+            }
+        });
         viewPager.setAdapter(mLoginRegisterViewPagerAdapter);
         viewPager.setOffscreenPageLimit(0);
 

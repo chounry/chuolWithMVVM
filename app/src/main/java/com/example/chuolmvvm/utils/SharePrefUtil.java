@@ -9,7 +9,6 @@ public class SharePrefUtil {
     private static final String USER_ID = "USER_ID";
     private static final String USERNAME = "USERNAME";
     private static final String EMAIL = "EMAIL";
-
     private static final String CHUOL = "CHUOL";
 
     public static void saveToken(Context context, String accessToken, String refreshToken) {

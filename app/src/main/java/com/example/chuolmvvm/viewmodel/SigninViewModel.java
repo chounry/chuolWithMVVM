@@ -1,5 +1,6 @@
 package com.example.chuolmvvm.viewmodel;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.databinding.ObservableField;
@@ -13,6 +14,9 @@ public class SigninViewModel extends AbsBaseViewModel {
     private ObservableInt mLoginBtnVisibility = new ObservableInt(View.VISIBLE);
     private ObservableInt mLoadingVisibility = new ObservableInt(View.GONE);
 
+    public SigninViewModel(Context context) {
+        super(context);
+    }
 
     public void setEmail(ObservableField<String> email) {
         mEmail = email;

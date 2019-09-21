@@ -1,7 +1,6 @@
 package com.example.chuolmvvm.ui.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +14,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.chuolmvvm.ChuolApplication;
 import com.example.chuolmvvm.R;
-import com.example.chuolmvvm.injection.Component;
+import com.example.chuolmvvm.injection.ControllerComponent;
+import com.example.chuolmvvm.injection.NetworkModule;
 
 public abstract class AbsBaseActivity extends ResultPermissionActivity {
-    private Component mComponent;
+    private ControllerComponent mComponent;
 
-    public Component getComponent() {
+    public ControllerComponent getComponent() {
         if (mComponent == null) {
-            mComponent = ((ChuolApplication) getApplication()).getComponent();
+            mComponent = ((ChuolApplication) getApplication()).getComponent()
+                    .getControllerComponent(new NetworkModule(getApplicationContext()));
         }
         return mComponent;
     }
@@ -48,10 +49,10 @@ public abstract class AbsBaseActivity extends ResultPermissionActivity {
         ImageButton navLeftBtn = v.findViewById(R.id.nav_left_btn);
         navLeftBtn.setImageResource(icon);
 
-        navLeftBtn.setOnClickListener(new View.OnClickListener(){
+        navLeftBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(absBaseActiviyListener != null){
+                if (absBaseActiviyListener != null) {
                     absBaseActiviyListener.onNavLeftBtnClicked();
                 }
             }
@@ -66,7 +67,7 @@ public abstract class AbsBaseActivity extends ResultPermissionActivity {
         actionBar.setCustomView(v);
     }
 
-    public interface AbsBaseActiviyListener{
+    public interface AbsBaseActiviyListener {
         void onNavLeftBtnClicked();
     }
 }

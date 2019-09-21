@@ -5,22 +5,28 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.chuolmvvm.ui.fragment.SigninFragment;
-import com.example.chuolmvvm.ui.fragment.SignupFragment;
+import com.example.chuolmvvm.ui.fragment.SignUpFragment;
 
 public class LoginRegisterViewPagerAdapter extends FragmentPagerAdapter {
     private int mNumTab;
-    public LoginRegisterViewPagerAdapter(FragmentManager fm,int numTab) {
+    private SignUpFragment.SignUpFragmentListener mSignUpFragmentListener;
+
+    public LoginRegisterViewPagerAdapter(FragmentManager fm, int numTab) {
         super(fm);
         mNumTab = numTab;
     }
 
+    public void setSignUpListener(SignUpFragment.SignUpFragmentListener signUpListener) {
+        mSignUpFragmentListener = signUpListener;
+    }
+
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new SigninFragment();
             case 1:
-                return new SignupFragment();
+                return SignUpFragment.newInstance(mSignUpFragmentListener);
         }
         return null;
     }
@@ -29,4 +35,5 @@ public class LoginRegisterViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mNumTab;
     }
+
 }

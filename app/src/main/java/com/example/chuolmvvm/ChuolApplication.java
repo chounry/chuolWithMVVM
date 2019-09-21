@@ -2,13 +2,13 @@ package com.example.chuolmvvm;
 
 import androidx.multidex.MultiDexApplication;
 
-import com.example.chuolmvvm.injection.Component;
-import com.example.chuolmvvm.injection.DaggerComponent;
+import com.example.chuolmvvm.injection.ApplicationComponent;
+import com.example.chuolmvvm.injection.DaggerApplicationComponent;
 
 import timber.log.Timber;
 
 public class ChuolApplication extends MultiDexApplication {
-    private Component mComponent;
+    private ApplicationComponent mComponent;
 
     @Override
     public void onCreate() {
@@ -16,9 +16,9 @@ public class ChuolApplication extends MultiDexApplication {
         Timber.plant(new Timber.DebugTree());
     }
 
-    public Component getComponent(){
+    public ApplicationComponent getComponent(){
         if(mComponent == null){
-            mComponent = DaggerComponent.builder().build();
+            mComponent = DaggerApplicationComponent.builder().build();
         }
         return mComponent;
     }

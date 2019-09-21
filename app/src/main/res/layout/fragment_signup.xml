@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.chuolmvvm.viewmodel.SignupViewModel" />
+            type="com.example.chuolmvvm.viewmodel.SignUpViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:paddingHorizontal="15dp"
         android:paddingTop="25dp">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,6 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={viewModel.firstName}"
+                    android:singleLine="true"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -46,6 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={viewModel.lastName}"
+                    android:singleLine="true"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -127,8 +128,8 @@
                 android:layout_marginTop="15dp"
                 android:background="@color/colorPrimary"
                 android:text="@string/sign_up_txt"
-                android:visibility="@{viewModel.signupBtnVisibility}"
-                android:onClick="@{()-> viewModel.onSignupClick()}"
+                android:visibility="@{viewModel.signUpBtnVisibility}"
+                android:onClick="@{()-> viewModel.onSignUpClick()}"
                 android:textColor="#fff" />
 
             <com.victor.loading.rotate.RotateLoading

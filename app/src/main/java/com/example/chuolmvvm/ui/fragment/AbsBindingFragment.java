@@ -15,7 +15,6 @@ public abstract class AbsBindingFragment<T extends ViewDataBinding> extends AbsB
     private T mBinding;
 //    private AbsBaseViewModel mAbsBaseViewModel;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
