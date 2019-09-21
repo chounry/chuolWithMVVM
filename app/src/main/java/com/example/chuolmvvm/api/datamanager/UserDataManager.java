@@ -16,11 +16,15 @@ public class UserDataManager {
         mApiService = apiService;
     }
 
-    public Observable<Response<SignUpResponse>> getUserSignUp(UserSignUp signUp){
+    public Observable<Response<SignUpResponse>> getUserSignUp(UserSignUp signUp) {
         return mApiService.signUp(signUp);
     }
 
-    public Observable<Response<User>> getUser(){
+    public Observable<Response<User>> getUser() {
         return mApiService.getUser();
+    }
+
+    public Observable<Response<SignUpResponse>> getLogin(String email, String password) {
+        return mApiService.login(email, password);
     }
 }

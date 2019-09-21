@@ -9,12 +9,12 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.adapter.LoginRegisterViewPagerAdapter;
 import com.example.chuolmvvm.databinding.ActivityLoginRegisterBinding;
+import com.example.chuolmvvm.ui.fragment.SignInFragment;
 import com.example.chuolmvvm.ui.fragment.SignUpFragment;
 import com.google.android.material.tabs.TabLayout;
 
 public class LoginRegisterActivity extends AbsBaseActivityBinding<ActivityLoginRegisterBinding> {
     private LoginRegisterViewPagerAdapter mLoginRegisterViewPagerAdapter;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +41,14 @@ public class LoginRegisterActivity extends AbsBaseActivityBinding<ActivityLoginR
                 finish();
             }
         });
+
+        mLoginRegisterViewPagerAdapter.setSignInFragmentListener(new SignInFragment.SignInFragmentListener() {
+            @Override
+            public void onSignInComplete() {
+                finish();
+            }
+        });
+
         viewPager.setAdapter(mLoginRegisterViewPagerAdapter);
         viewPager.setOffscreenPageLimit(0);
 

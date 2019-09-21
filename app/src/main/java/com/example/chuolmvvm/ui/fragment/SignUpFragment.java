@@ -28,7 +28,7 @@ public class SignUpFragment extends AbsBindingFragment<FragmentSignupBinding>
     ApiService mApiService;
     private SignUpFragmentListener mSignUpFragmentListener;
 
-    public static SignUpFragment newInstance(SignUpFragmentListener signupFragmentListener){
+    public static SignUpFragment newInstance(SignUpFragmentListener signupFragmentListener) {
         SignUpFragment signUpFragment = new SignUpFragment();
         signUpFragment.setSignUpFragmentListener(signupFragmentListener);
         return signUpFragment;

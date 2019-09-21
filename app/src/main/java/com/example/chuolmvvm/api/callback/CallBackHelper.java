@@ -34,7 +34,8 @@ public class CallBackHelper<T extends Response<D>, D> {
 
                     } else if (t.code() == Constants.INVALID_CODE) {
                         onCallBack.onErrorBody(t.errorBody().string());
-
+                    }else {
+                        onCallBack.onComplete(null , t.code());
                     }
 
                 }, throwable -> {

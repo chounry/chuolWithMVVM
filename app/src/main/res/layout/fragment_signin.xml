@@ -3,7 +3,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.chuolmvvm.viewmodel.SigninViewModel" />
+            type="com.example.chuolmvvm.viewmodel.SignInViewModel" />
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -58,10 +58,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
                 android:background="@color/colorPrimary"
-                android:text="@string/login"
                 android:onClick="@{() -> viewModel.onLoginClick()}"
-                android:visibility="@{viewModel.loginBtnVisibility}"
-                android:textColor="#fff" />
+                android:text="@string/login"
+                android:textColor="#fff"
+                android:visibility="@{viewModel.loginBtnVisibility}" />
 
             <com.victor.loading.rotate.RotateLoading
                 android:id="@+id/rotateloading"

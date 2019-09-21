@@ -110,7 +110,6 @@ public class SignUpViewModel extends AbsBaseViewModel {
                     SharePrefUtil.saveToken(getContext(), data.getAccessToken(), data.getRefreshToken());
                     requestUser();
                 }
-                hideLoading();
             }
         }));
     }
