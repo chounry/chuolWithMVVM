@@ -1,0 +1,111 @@
+package com.example.chuolmvvm.viewmodel;
+
+import android.content.Context;
+import android.view.View;
+
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
+
+import com.example.chuolmvvm.api.callback.CallBackHelper;
+import com.example.chuolmvvm.api.callback.OnCallBackWithErrorBody;
+import com.example.chuolmvvm.api.datamanager.UserDataManager;
+import com.example.chuolmvvm.model.User;
+
+import io.reactivex.Observable;
+import retrofit2.Response;
+import timber.log.Timber;
+
+public class NavHeaderViewModel extends AbsBaseViewModel {
+
+    public LoginDialogViewModel mLoginDialogViewModel;
+    private ObservableField<String> mUserName = new ObservableField<>();
+    private ObservableField<String> mEmail = new ObservableField<>();
+    private ObservableField<String> mImageUrl = new ObservableField<>();
+    private ObservableInt mUserInfoVisibility = new ObservableInt(View.GONE);
+    private UserDataManager mUserDataManager;
+    private NavHeaderViewModelListener mNavHeaderViewModelListener;
+    private boolean mIsLogin;
+    private boolean mLoginDialogVisibility;
+
+
+    public NavHeaderViewModel(Context context,
+                              boolean isLogin,
+                              UserDataManager userDataManager,
+                              NavHeaderViewModelListener navHeaderViewModelListener) {
+        super(context);
+        mLoginDialogViewModel = new LoginDialogViewModel(context);
+        mIsLogin = isLogin;
+        mUserDataManager = userDataManager;
+        mNavHeaderViewModelListener = navHeaderViewModelListener;
+        initView();
+    }
+
+    private void initView() {
+        validateView();
+        if (mIsLogin) {
+            Observable<Response<User>> call = mUserDataManager.getUser();
+            CallBackHelper<Response<User>, User> helper = new CallBackHelper<>(getContext(), call);
+            addDisposible(helper.execute(new OnCallBackWithErrorBody<User>() {
+                @Override
+                public void onErrorBody(String errorBody) {
+                    Timber.e("onErrorBody " + errorBody);
+
+                }
+
+                @Override
+                public void onFail(Throwable throwable) {
+                    Timber.e("onFail" + throwable.getMessage());
+
+                }
+
+                @Override
+                public void onComplete(User data, int code) {
+                    Timber.e("onComplete");
+                    updateUser(data);
+                }
+            }));
+        }
+    }
+
+    public void updateUser(User user){
+        mEmail.set(user.getEmail());
+        mUserName.set(user.getUsername());
+        mImageUrl.set(user.getImgProfile());
+    }
+
+    public void validateView() {
+        if (mIsLogin) {
+            mLoginDialogVisibility = false;
+            mUserInfoVisibility.set(View.VISIBLE);
+        } else {
+            mLoginDialogVisibility = true;
+            mUserInfoVisibility.set(View.GONE);
+        }
+
+        mNavHeaderViewModelListener.onNeedChangeLoginDialogVisibility(mLoginDialogVisibility);
+    }
+
+    public ObservableField<String> getUserName() {
+        return mUserName;
+    }
+
+    public ObservableField<String> getEmail() {
+        return mEmail;
+    }
+
+    public void setEmail(String email) {
+        mEmail.set(email);
+    }
+
+    public ObservableField<String> getImageUrl() {
+        return mImageUrl;
+    }
+
+    public ObservableInt getUserInfoVisibility() {
+        return mUserInfoVisibility;
+    }
+
+    public interface NavHeaderViewModelListener{
+        void onNeedChangeLoginDialogVisibility(boolean isVisible);
+    }
+}

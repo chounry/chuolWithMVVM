@@ -1,55 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingTop="20dp"
-    android:paddingBottom="50dp"
-    android:background="#48C0E8">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:id="@+id/user_info_lin"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.chuolmvvm.viewmodel.NavHeaderViewModel" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#48C0E8"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:gravity="center_vertical|center_horizontal">
+        android:paddingTop="20dp"
+        android:paddingBottom="50dp"
+        app:visibility="@{viewModel.userInfoVisibility}">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/profile_image"
-            android:layout_width="94dp"
-            android:layout_height="94dp"
-            android:layout_marginTop="35dp"
-            app:civ_border_color="#FF000000" />
+        <LinearLayout
+            android:id="@+id/user_info_lin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/user_name_tv"
-            android:layout_gravity="center"
-            android:textAlignment="center"
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="94dp"
+                android:layout_height="94dp"
+                android:layout_marginTop="35dp"
+                app:civ_border_color="#FF000000"
+                app:url="@{viewModel.imageUrl}"
+                android:layout_marginBottom="10dp"
+                tools:src="@color/cardview_dark_background" />
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{viewModel.userName}"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="MaVin" />
+
+            <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{viewModel.email}"
+                android:textAlignment="center"
+                android:textColor="#FFFF"
+                android:textSize="14sp"
+                tools:text="koung.mavin@gmail.com" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/login_dialog_include"
+            layout="@layout/dialog_login"
             android:layout_width="match_parent"
-            android:text="MaVin"
-            android:textColor="#FFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/email_tv"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:text="koung.mavin@gmail.com"
-            android:textColor="#FFFF"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:dialogLoginViewModel="@{viewModel.mLoginDialogViewModel}"
+            tools:visibility="gone"/>
+
     </LinearLayout>
-
-    <include
-        android:id="@+id/login_dialog_include"
-        layout="@layout/dialog_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</layout>

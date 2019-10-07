@@ -93,7 +93,7 @@ public class SignInViewModel extends AbsBaseViewModel {
             public void onComplete(SignUpResponse data, int code) {
 
                 if (code == Constants.SUCCESS_CODE) {
-                    SharePrefUtil.saveToken(getContext(), data.getAccessToken(), data.getRefreshToken());
+                    SharePrefUtil.setToken(getContext(), data.getAccessToken(), data.getRefreshToken());
                     requestUser();
                 } else if (code == Constants.UNAUTHORIZE) {
                     mSignInViewModelListener.onUnAuthorized();
@@ -124,6 +124,8 @@ public class SignInViewModel extends AbsBaseViewModel {
             public void onComplete(User data, int code) {
                 if (code == Constants.SUCCESS_CODE) {
                     SharePrefUtil.setUserId(getContext(), data.getUserId());
+                    SharePrefUtil.setEmail(getContext(), data.getEmail());
+                    SharePrefUtil.setUserName(getContext(), data.getFirstName(), data.getLastName());
                     mSignInViewModelListener.onSignInComplete();
                 }
             }

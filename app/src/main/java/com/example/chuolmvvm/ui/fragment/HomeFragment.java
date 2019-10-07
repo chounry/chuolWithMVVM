@@ -2,7 +2,6 @@ package com.example.chuolmvvm.ui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TableLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

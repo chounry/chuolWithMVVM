@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class User {
     public static final String userId = "id";
     public static final String fName = "fname";
-    public static final String lName = "lName";
+    public static final String lName = "lname";
     public static final String phone = "phone";
     public static final String email = "email";
     public static final String imgLoc = "img_loc";
@@ -70,4 +70,9 @@ public class User {
     public void setImgProfile(String imgProfile) {
         mImgProfile = imgProfile;
     }
+
+    public String getUsername(){
+        return mFirstName + " " + mLastName;
+    }
+
 }

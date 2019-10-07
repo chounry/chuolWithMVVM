@@ -39,6 +39,9 @@
     <string name="first_name">First Name</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="room">Room</string>
+    <string name="home">Home</string>
+    <string name="sign_in_sign_up_account">Sign In/Sign Up Account</string>
     <string-array name="for_sale_rent">
         <item>For Sale</item>
         <item>For Rent</item>

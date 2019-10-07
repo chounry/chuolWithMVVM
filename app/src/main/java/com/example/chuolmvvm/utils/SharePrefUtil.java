@@ -11,13 +11,13 @@ public class SharePrefUtil {
     private static final String EMAIL = "EMAIL";
     private static final String CHUOL = "CHUOL";
 
-    public static void saveToken(Context context, String accessToken, String refreshToken) {
+    public static void setToken(Context context, String accessToken, String refreshToken) {
         SharedPreferences sh = context.getSharedPreferences(CHUOL, Context.MODE_PRIVATE);
         sh.edit().putString(ACCESS_TOKEN, accessToken).apply();
         sh.edit().putString(REFRES_TOKEN, refreshToken).apply();
     }
 
-    public static String getAcessToken(Context context) {
+    public static String getAccessToken(Context context) {
         SharedPreferences sh = context.getSharedPreferences(CHUOL, Context.MODE_PRIVATE);
         return sh.getString(ACCESS_TOKEN, null);
     }
@@ -37,6 +37,17 @@ public class SharePrefUtil {
         return sh.getString(USER_ID, null);
     }
 
+    public static void setEmail(Context context, String email){
+        SharedPreferences sh = context.getSharedPreferences(CHUOL, Context.MODE_PRIVATE);
+        sh.edit().putString(EMAIL, email).apply();
+    }
+
+    public static String  getEmail(Context context){
+        SharedPreferences sh = context.getSharedPreferences(CHUOL, Context.MODE_PRIVATE);
+        return sh.getString(EMAIL, null);
+
+    }
+
     public static void setUserName(Context context, String firstName, String lastName) {
         SharedPreferences sh = context.getSharedPreferences(CHUOL, Context.MODE_PRIVATE);
         sh.edit().putString(USERNAME, firstName + " " + lastName).apply();
@@ -45,5 +56,14 @@ public class SharePrefUtil {
     public static String getUsername(Context context){
         SharedPreferences sh = context.getSharedPreferences(CHUOL,Context.MODE_PRIVATE);
         return sh.getString(USERNAME, null);
+    }
+
+    public static void clearAll(Context context){
+        SharedPreferences sh = context.getSharedPreferences(CHUOL, Context.MODE_PRIVATE);
+        sh.edit().clear().apply();
+    }
+
+    public static boolean isLogin(Context context){
+        return SharePrefUtil.getAccessToken(context) != null;
     }
 }

@@ -25,7 +25,7 @@ public class HttpHeaderInterceptor implements Interceptor {
                 .request()
                 .newBuilder()
                 .addHeader("accept", "application/json")
-                .addHeader(AUTHENTICATION, BEARER + " " + SharePrefUtil.getAcessToken(mContext));
+                .addHeader(AUTHENTICATION, BEARER + " " + SharePrefUtil.getAccessToken(mContext));
 
         Request request = builder.build();
         return chain.proceed(request);

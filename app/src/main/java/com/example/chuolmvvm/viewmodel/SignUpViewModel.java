@@ -107,7 +107,7 @@ public class SignUpViewModel extends AbsBaseViewModel {
             @Override
             public void onComplete(SignUpResponse data, int code) {
                 if (code == Constants.SUCCESS_CODE) {
-                    SharePrefUtil.saveToken(getContext(), data.getAccessToken(), data.getRefreshToken());
+                    SharePrefUtil.setToken(getContext(), data.getAccessToken(), data.getRefreshToken());
                     requestUser();
                 }
             }
@@ -131,6 +131,8 @@ public class SignUpViewModel extends AbsBaseViewModel {
             @Override
             public void onComplete(User data, int code) {
                 SharePrefUtil.setUserId(getContext(), data.getUserId());
+                SharePrefUtil.setUserName(getContext(), data.getFirstName(), data.getLastName());
+                SharePrefUtil.setEmail(getContext(), data.getEmail());
                 mSignUpViewModelListener.onSignUpComplete();
             }
         });
