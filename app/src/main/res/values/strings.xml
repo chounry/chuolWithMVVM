@@ -42,6 +42,14 @@
     <string name="room">Room</string>
     <string name="home">Home</string>
     <string name="sign_in_sign_up_account">Sign In/Sign Up Account</string>
+    <string name="select_image">Select Image</string>
+    <string name="cancel">Cancel</string>
+    <string name="personal_first_name">First Name :</string>
+    <string name="save">Save</string>
+    <string name="personal_tel">Tel :</string>
+    <string name="personal_email">Email :</string>
+    <string name="personal_last_name">Last Name :</string>
+    <string name="personal_information">Personal Information</string>
     <string-array name="for_sale_rent">
         <item>For Sale</item>
         <item>For Rent</item>
