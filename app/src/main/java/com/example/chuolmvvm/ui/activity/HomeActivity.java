@@ -49,8 +49,6 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
 
     private NavHeaderViewModel mNavHeaderViewModel;
     private NavHeadBinding mNavHeadBinding;
-    private DialogLoginBinding mDialogLoginBinding;
-    private LoginDialogViewModel mLoginDialogViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +63,13 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
         Timber.i("Home tag" + homeFragment.getMyTag());
         initNavHeader();
         setFragment(R.id.container_home, homeFragment, homeFragment.getMyTag());
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                Timber.e("Fragment backStack count" + getSupportFragmentManager().getBackStackEntryCount());
+            }
+        });
     }
 
     private void initNavigation() {
@@ -97,21 +102,6 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
                 this);
 
         mNavHeadBinding.setViewModel(mNavHeaderViewModel);
-//        NavHeadBinding
-
-//        View view = mNavigationView.getHeaderView(0);
-//        View loginView = view.findViewById(R.id.login_dialog_include);
-//        View userInfoView = view.findViewById(R.id.user_info_lin);
-//        if(isLogin()){
-//            Timber.e("Login");
-//            userInfoView.setVisibility(View.VISIBLE);
-//            loginView.setVisibility(View.GONE);
-//
-//        }else{
-//            loginView.setVisibility(View.VISIBLE);
-//            userInfoView.setVisibility(View.GONE);
-//            loginView.setOnClickListener(view1 -> openLoginRegisterActivity());
-//        }
     }
 
     private void openLoginRegisterActivity() {
@@ -174,7 +164,7 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.container_home);
         if (fragment instanceof HomeFragment) {
-            super.onBackPressed();
+            finish();
         } else {
             HomeFragment homeFragment = new HomeFragment();
             setFragmentOnTop(R.id.container_home, homeFragment, homeFragment.getMyTag());
@@ -192,11 +182,11 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
             }
 
             if (fragment instanceof HomeFragment) {
-                fragmentManager.popBackStack();
+                fragmentManager.popBackStack(0, 0);
             } else {
                 if (!(topFragment instanceof HomeFragment)) {
                     // if the top fragment is the home fragment we don't remove it from the backstack
-                    fragmentManager.popBackStack();
+                    fragmentManager.popBackStack(0,0);
                 }
                 setFragment(id, fragment, tag);
             }
@@ -208,5 +198,10 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
         View view = mNavigationView.getHeaderView(0);
         View loginView = view.findViewById(R.id.login_dialog_include);
         loginView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void onLoginSignUpClicked() {
+        openLoginRegisterActivity();
     }
 }

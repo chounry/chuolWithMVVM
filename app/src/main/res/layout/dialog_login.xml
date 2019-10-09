@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,7 +8,7 @@
             type="com.example.chuolmvvm.viewmodel.LoginDialogViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,8 +40,10 @@
             android:layout_gravity="center"
             android:background="#00FFFFFF"
             android:clickable="true"
+            android:onClick="@{()-> dialogLoginViewModel.onLoginFacebookClick()}"
             android:scaleType="centerCrop"
-            android:src="@drawable/facebook" />
+            android:src="@drawable/facebook"
+            android:focusable="true" />
 
         <TextView
             android:id="@+id/login_sign_up_btn"
@@ -50,14 +52,11 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:clickable="true"
+            android:onClick="@{() ->dialogLoginViewModel.onLoginSignUpClick()}"
             android:padding="15dp"
             android:text="@string/sign_in_sign_up_account"
-            android:textColor="#fff" />
-        <!--<ImageView-->
-        <!--android:layout_width="200dp"-->
-        <!--android:layout_height="50dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:src="@drawable/gmail" />-->
+            android:textColor="#fff"
+            android:focusable="true" />
 
     </LinearLayout>
 </layout>

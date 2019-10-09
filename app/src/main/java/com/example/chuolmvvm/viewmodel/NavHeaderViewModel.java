@@ -15,7 +15,8 @@ import io.reactivex.Observable;
 import retrofit2.Response;
 import timber.log.Timber;
 
-public class NavHeaderViewModel extends AbsBaseViewModel {
+public class NavHeaderViewModel extends AbsBaseViewModel
+        implements LoginDialogViewModel.LoginDialogViewModelListener {
 
     public LoginDialogViewModel mLoginDialogViewModel;
     private ObservableField<String> mUserName = new ObservableField<>();
@@ -33,7 +34,7 @@ public class NavHeaderViewModel extends AbsBaseViewModel {
                               UserDataManager userDataManager,
                               NavHeaderViewModelListener navHeaderViewModelListener) {
         super(context);
-        mLoginDialogViewModel = new LoginDialogViewModel(context);
+        mLoginDialogViewModel = new LoginDialogViewModel(context, this);
         mIsLogin = isLogin;
         mUserDataManager = userDataManager;
         mNavHeaderViewModelListener = navHeaderViewModelListener;
@@ -105,7 +106,19 @@ public class NavHeaderViewModel extends AbsBaseViewModel {
         return mUserInfoVisibility;
     }
 
+    @Override
+    public void onLoginSignUpClicked() {
+        mNavHeaderViewModelListener.onLoginSignUpClicked();
+    }
+
+    @Override
+    public void onLoginFacebookClicked() {
+
+    }
+
     public interface NavHeaderViewModelListener{
         void onNeedChangeLoginDialogVisibility(boolean isVisible);
+
+        void onLoginSignUpClicked();
     }
 }
