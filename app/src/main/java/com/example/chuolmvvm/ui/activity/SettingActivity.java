@@ -28,7 +28,7 @@ public class SettingActivity extends AbsActivityFragment<SettingFragment, Activi
     @Override
     public void onPersonalInfoClicked() {
         PersonalFragment fragment = new PersonalFragment();
-        setFragmentOnTop(fragment, fragment.getMyTag());
+        setFragmentOnTop(fragment, fragment.getMyTag(), true);
     }
 
     @Override

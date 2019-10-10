@@ -43,6 +43,16 @@ public abstract class AbsBaseActivity extends ResultPermissionActivity {
                 .commitAllowingStateLoss();
     }
 
+    public void setFragmentWithAnima(@IdRes int id, Fragment fragment, String tag) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(R.animator.slide_in_left,
+                        R.animator.slide_out_right, 0, 0)
+                .replace(id, fragment, tag)
+                .addToBackStack(null)
+                .commitAllowingStateLoss();
+    }
+
     public void showActionBar(@DrawableRes int icon, final AbsBaseActiviyListener absBaseActiviyListener) {
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_action_bar, null);

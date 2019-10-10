@@ -18,7 +18,7 @@ public abstract class AbsActivityFragment<F extends Fragment, T extends ViewData
         extends AbsBaseActivityBinding<T> {
     private Class<F> baseFragment = (Class<F>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
 
-    public void setFragmentOnTop(Fragment fragment, String tag) {
+    public void setFragmentOnTop(Fragment fragment, String tag, boolean needAnima) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment topFragment = fragmentManager.findFragmentById(getFragmentContainerId());
         if (fragment instanceof AbsBaseFragment) {
@@ -35,7 +35,10 @@ public abstract class AbsActivityFragment<F extends Fragment, T extends ViewData
                     // if the top fragment is the home fragment we don't remove it from the backstack
                     fragmentManager.popBackStack(0, 0);
                 }
-                setFragment(getFragmentContainerId(), fragment, tag);
+                if (!needAnima)
+                    setFragment(getFragmentContainerId(), fragment, tag);
+                else
+                    setFragmentWithAnima(getFragmentContainerId(), fragment, tag);
             }
         }
     }
@@ -49,7 +52,7 @@ public abstract class AbsActivityFragment<F extends Fragment, T extends ViewData
         Fragment fragment = fragmentManager.findFragmentById(getFragmentContainerId());
         if (baseFragment.isInstance(fragment)) {
             finish();
-        }else {
+        } else {
             super.onBackPressed();
         }
     }

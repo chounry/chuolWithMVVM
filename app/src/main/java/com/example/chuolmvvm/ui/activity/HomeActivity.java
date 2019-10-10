@@ -141,7 +141,7 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
         }
 
         if (fragment != null) {
-            setFragmentOnTop(fragment, ((AbsBindingFragment) fragment).getMyTag());
+            setFragmentOnTop(fragment, ((AbsBindingFragment) fragment).getMyTag(), false);
         }
         mDrawerLayout.closeDrawers();
         return true;
