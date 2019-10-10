@@ -2,7 +2,7 @@ package com.example.chuolmvvm.injection;
 
 
 import com.example.chuolmvvm.ui.activity.HomeActivity;
-import com.example.chuolmvvm.ui.activity.PersonalActivity;
+import com.example.chuolmvvm.ui.activity.PersonalFragment;
 import com.example.chuolmvvm.ui.fragment.SignInFragment;
 import com.example.chuolmvvm.ui.fragment.SignUpFragment;
 
@@ -16,6 +16,6 @@ public interface ControllerComponent {
 
     void inject(SignInFragment signInFragment);
 
-    void inject(PersonalActivity personalActivity);
+    void inject(PersonalFragment personalFragment);
 
 }

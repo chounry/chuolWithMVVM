@@ -15,7 +15,7 @@ import io.reactivex.Observable;
 import retrofit2.Response;
 import timber.log.Timber;
 
-public class PersonalActivityViewModel extends AbsBaseViewModel {
+public class PersonalFragmentViewModel extends AbsBaseViewModel {
     private ObservableField<String> mFirstName = new ObservableField<>();
     private ObservableField<String> mLastName = new ObservableField<>();
     private ObservableField<String> mEmail = new ObservableField<>();
@@ -26,7 +26,7 @@ public class PersonalActivityViewModel extends AbsBaseViewModel {
 
     private UserDataManager mUserDataManager;
 
-    public PersonalActivityViewModel(Context context, UserDataManager userDataManager) {
+    public PersonalFragmentViewModel(Context context, UserDataManager userDataManager) {
         super(context);
         mUserDataManager = userDataManager;
         getUser();

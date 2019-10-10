@@ -26,7 +26,7 @@ public abstract class AbsBindingFragment<T extends ViewDataBinding> extends AbsB
         return mBinding;
     }
 
-    public void setVariable(int id,Object object){
+    public void setVariable(int id, Object object) {
         mBinding.setVariable(id, object);
     }
 

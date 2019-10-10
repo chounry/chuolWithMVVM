@@ -50,6 +50,12 @@
     <string name="personal_email">Email :</string>
     <string name="personal_last_name">Last Name :</string>
     <string name="personal_information">Personal Information</string>
+    <string name="setting">Setting</string>
+    <string name="post_history">Post History</string>
+    <string name="sign_out">Sign out</string>
+    <string name="choul">Choul</string>
+    <string name="about_us">About us</string>
+    <string name="term_of_use_and_conditions">Term of use and conditions</string>
     <string-array name="for_sale_rent">
         <item>For Sale</item>
         <item>For Rent</item>

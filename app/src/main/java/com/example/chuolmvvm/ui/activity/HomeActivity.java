@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -21,14 +18,11 @@ import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.api.ApiService;
 import com.example.chuolmvvm.api.datamanager.UserDataManager;
 import com.example.chuolmvvm.databinding.ActivityHomeBinding;
-import com.example.chuolmvvm.databinding.DialogLoginBinding;
 import com.example.chuolmvvm.databinding.NavHeadBinding;
-import com.example.chuolmvvm.ui.fragment.AbsBaseFragment;
 import com.example.chuolmvvm.ui.fragment.AbsBindingFragment;
 import com.example.chuolmvvm.ui.fragment.ChatOutFragment;
 import com.example.chuolmvvm.ui.fragment.HomeFragment;
 import com.example.chuolmvvm.utils.SharePrefUtil;
-import com.example.chuolmvvm.viewmodel.LoginDialogViewModel;
 import com.example.chuolmvvm.viewmodel.NavHeaderViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -36,8 +30,9 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
-        implements NavigationView.OnNavigationItemSelectedListener, NavHeaderViewModel.NavHeaderViewModelListener {
+public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHomeBinding>
+        implements NavigationView.OnNavigationItemSelectedListener,
+        NavHeaderViewModel.NavHeaderViewModelListener {
     private static final String TAG = "HomeActivity";
     private Toolbar mToolbar;
     private NavigationView mNavigationView;
@@ -64,12 +59,9 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
         initNavHeader();
         setFragment(R.id.container_home, homeFragment, homeFragment.getMyTag());
 
-        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                Timber.e("Fragment backStack count" + getSupportFragmentManager().getBackStackEntryCount());
-            }
-        });
+        getSupportFragmentManager().addOnBackStackChangedListener(
+                () -> Timber.e("Fragment backStack count" +
+                        getSupportFragmentManager().getBackStackEntryCount()));
     }
 
     private void initNavigation() {
@@ -104,8 +96,8 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
         mNavHeadBinding.setViewModel(mNavHeaderViewModel);
     }
 
-    private void openLoginRegisterActivity() {
-        Intent intent = new Intent(HomeActivity.this, LoginRegisterActivity.class);
+    private void openActivityWithNewTaskFlag(Class<?> cls) {
+        Intent intent = new Intent(HomeActivity.this, cls);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
@@ -144,10 +136,12 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
                 fragment = new ChatOutFragment();
             else
                 createLoginDialog();
+        } else if (id == R.id.item_setting) {
+            openActivityWithNewTaskFlag(SettingActivity.class);
         }
 
         if (fragment != null) {
-            setFragmentOnTop(R.id.container_home, fragment, ((AbsBindingFragment) fragment).getMyTag());
+            setFragmentOnTop(fragment, ((AbsBindingFragment) fragment).getMyTag());
         }
         mDrawerLayout.closeDrawers();
         return true;
@@ -160,37 +154,8 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
     }
 
     @Override
-    public void onBackPressed() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.container_home);
-        if (fragment instanceof HomeFragment) {
-            finish();
-        } else {
-            HomeFragment homeFragment = new HomeFragment();
-            setFragmentOnTop(R.id.container_home, homeFragment, homeFragment.getMyTag());
-        }
-    }
-
-    public void setFragmentOnTop(@IdRes int id, Fragment fragment, String tag) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment topFragment = fragmentManager.findFragmentById(id);
-        if (fragment instanceof AbsBaseFragment) {
-            Timber.i(((AbsBindingFragment) topFragment).getMyTag() + " Nothing");
-            if (((AbsBindingFragment) topFragment).getMyTag().equals(tag)) {
-                // if the replaced fragment is already place
-                return;
-            }
-
-            if (fragment instanceof HomeFragment) {
-                fragmentManager.popBackStack(0, 0);
-            } else {
-                if (!(topFragment instanceof HomeFragment)) {
-                    // if the top fragment is the home fragment we don't remove it from the backstack
-                    fragmentManager.popBackStack(0,0);
-                }
-                setFragment(id, fragment, tag);
-            }
-        }
+    int getFragmentContainerId() {
+        return R.id.container_home;
     }
 
     @Override
@@ -202,6 +167,6 @@ public class HomeActivity extends AbsBaseActivityBinding<ActivityHomeBinding>
 
     @Override
     public void onLoginSignUpClicked() {
-        openLoginRegisterActivity();
+        openActivityWithNewTaskFlag(LoginRegisterActivity.class);
     }
 }

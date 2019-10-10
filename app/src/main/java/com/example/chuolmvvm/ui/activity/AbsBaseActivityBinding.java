@@ -7,13 +7,15 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.Fragment;
 
 import com.example.chuolmvvm.viewmodel.AbsBaseViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbsBaseActivityBinding<T extends ViewDataBinding> extends AbsBaseActivity {
+public abstract class AbsBaseActivityBinding<T extends ViewDataBinding>
+        extends AbsBaseActivity {
     private static final String TAG = "AbsBaseActivityBinding";
     private T mBinding;
     private List<AbsBaseViewModel> mAbsBaseViewModels = new ArrayList<>();
