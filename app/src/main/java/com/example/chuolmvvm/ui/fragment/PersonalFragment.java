@@ -15,7 +15,10 @@ import com.example.chuolmvvm.viewmodel.PersonalFragmentViewModel;
 
 import javax.inject.Inject;
 
-public class PersonalFragment extends AbsBindingFragment<FragmentPersonalInfoBinding> {
+import timber.log.Timber;
+
+public class PersonalFragment extends AbsBindingFragment<FragmentPersonalInfoBinding>
+implements PersonalFragmentViewModel.PersonalFragmentViewModelListener {
     private static final String TAG = "PersonalFragment";
 
     @Inject
@@ -26,7 +29,8 @@ public class PersonalFragment extends AbsBindingFragment<FragmentPersonalInfoBin
         super.onViewCreated(view, savedInstanceState);
         getComponent().inject(this);
         setVariable(com.example.chuolmvvm.BR.viewModel,
-                new PersonalFragmentViewModel(getContext(), new UserDataManager(mApiService)));
+                new PersonalFragmentViewModel(getContext(),
+                        new UserDataManager(mApiService), this));
     }
 
     @Override
@@ -37,5 +41,11 @@ public class PersonalFragment extends AbsBindingFragment<FragmentPersonalInfoBin
     @Override
     public String getMyTag() {
         return TAG;
+    }
+
+    @Override
+    public void onBackClicked() {
+        Timber.e("onBackClicked");
+        getFragmentManager().popBackStack();
     }
 }
