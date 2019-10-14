@@ -39,7 +39,7 @@ public class NavHeaderViewModel extends AbsBaseViewModel
         initView();
     }
 
-    private void initView() {
+    public void initView() {
         validateView();
         if (isLogin()) {
             Observable<Response<User>> call = mUserDataManager.getUser();

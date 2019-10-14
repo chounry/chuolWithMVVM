@@ -114,7 +114,7 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
     protected void onResume() {
         super.onResume();
         if (mNavHeaderViewModel != null){
-            mNavHeaderViewModel.validateView();
+            mNavHeaderViewModel.initView();
         }
     }
 
