@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -85,7 +86,6 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
         getBinding().navHome.addHeaderView(mNavHeadBinding.getRoot());
 
         mNavHeaderViewModel = new NavHeaderViewModel(getApplicationContext(),
-                SharePrefUtil.isLogin(getApplicationContext()),
                 new UserDataManager(mApiService),
                 this);
 
@@ -110,6 +110,13 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mNavHeaderViewModel != null){
+            mNavHeaderViewModel.validateView();
+        }
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -133,7 +140,10 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
             else
                 createLoginDialog();
         } else if (id == R.id.item_setting) {
-            openActivityWithNewTaskFlag(SettingActivity.class);
+            if (isLogin())
+                openActivityWithNewTaskFlag(SettingActivity.class);
+            else
+                createLoginDialog();
         }
 
         if (fragment != null) {
@@ -146,6 +156,11 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
     private void createLoginDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialog_login);
+        TextView loginSignUpBtn = dialog.findViewById(R.id.login_sign_up_btn);
+        loginSignUpBtn.setOnClickListener(view -> {
+            onLoginSignUpClicked();
+            dialog.dismiss();
+        });
         dialog.show();
     }
 
@@ -156,9 +171,14 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
 
     @Override
     public void onNeedChangeLoginDialogVisibility(boolean isVisible) {
-        View view = mNavigationView.getHeaderView(0);
-        View loginView = view.findViewById(R.id.login_dialog_include);
-        loginView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        Timber.e("onNeedChangeLoginDialogVisibility out " + isVisible);
+        if(mNavHeadBinding != null){
+            Timber.e("onNeedChangeLoginDialogVisibility in");
+            View view = mNavHeadBinding.getRoot();
+            View loginView = view.findViewById(R.id.login_dialog_include);
+            loginView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        }
+
     }
 
     @Override

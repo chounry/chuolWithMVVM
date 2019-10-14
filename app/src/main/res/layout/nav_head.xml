@@ -14,16 +14,17 @@
         android:layout_height="wrap_content"
         android:background="#48C0E8"
         android:orientation="vertical"
-        android:paddingTop="20dp"
-        android:paddingBottom="50dp"
-        app:visibility="@{viewModel.userInfoVisibility}">
+        android:paddingTop="20dp">
 
         <LinearLayout
             android:id="@+id/user_info_lin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:visibility="@{viewModel.userInfoVisibility}"
+            tools:visibility="visible"
+            android:paddingBottom="50dp">
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"

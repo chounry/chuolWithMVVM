@@ -10,6 +10,7 @@ import com.example.chuolmvvm.api.callback.CallBackHelper;
 import com.example.chuolmvvm.api.callback.OnCallBackWithErrorBody;
 import com.example.chuolmvvm.api.datamanager.UserDataManager;
 import com.example.chuolmvvm.model.User;
+import com.example.chuolmvvm.utils.SharePrefUtil;
 
 import io.reactivex.Observable;
 import retrofit2.Response;
@@ -25,17 +26,14 @@ public class NavHeaderViewModel extends AbsBaseViewModel
     private ObservableInt mUserInfoVisibility = new ObservableInt(View.GONE);
     private UserDataManager mUserDataManager;
     private NavHeaderViewModelListener mNavHeaderViewModelListener;
-    private boolean mIsLogin;
     private boolean mLoginDialogVisibility;
 
 
     public NavHeaderViewModel(Context context,
-                              boolean isLogin,
                               UserDataManager userDataManager,
                               NavHeaderViewModelListener navHeaderViewModelListener) {
         super(context);
         mLoginDialogViewModel = new LoginDialogViewModel(context, this);
-        mIsLogin = isLogin;
         mUserDataManager = userDataManager;
         mNavHeaderViewModelListener = navHeaderViewModelListener;
         initView();
@@ -43,7 +41,7 @@ public class NavHeaderViewModel extends AbsBaseViewModel
 
     private void initView() {
         validateView();
-        if (mIsLogin) {
+        if (isLogin()) {
             Observable<Response<User>> call = mUserDataManager.getUser();
             CallBackHelper<Response<User>, User> helper = new CallBackHelper<>(getContext(), call);
             addDisposible(helper.execute(new OnCallBackWithErrorBody<User>() {
@@ -75,7 +73,7 @@ public class NavHeaderViewModel extends AbsBaseViewModel
     }
 
     public void validateView() {
-        if (mIsLogin) {
+        if (isLogin()) {
             mLoginDialogVisibility = false;
             mUserInfoVisibility.set(View.VISIBLE);
         } else {
@@ -85,6 +83,12 @@ public class NavHeaderViewModel extends AbsBaseViewModel
 
         mNavHeaderViewModelListener.onNeedChangeLoginDialogVisibility(mLoginDialogVisibility);
     }
+
+    private boolean isLogin(){
+        return SharePrefUtil.isLogin(getContext());
+    }
+
+
 
     public ObservableField<String> getUserName() {
         return mUserName;

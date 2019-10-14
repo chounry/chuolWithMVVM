@@ -9,23 +9,20 @@
     </data>
 
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:background="#48C0E8"
         android:orientation="vertical"
-        android:paddingVertical="25dp"
-        tools:context=".ui.activity.HomeActivity">
+        android:paddingVertical="25dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="35dp"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
-            android:paddingHorizontal="30dp">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="140sp"
@@ -33,6 +30,12 @@
                 android:src="@drawable/app_logo" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="160dp"
+            android:layout_gravity="center_horizontal"/>
 
         <ImageButton
             android:layout_width="220dp"
