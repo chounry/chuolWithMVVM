@@ -8,10 +8,10 @@ public class User {
     public static final String lName = "lname";
     public static final String phone = "phone";
     public static final String email = "email";
-    public static final String imgLoc = "img_loc";
+    public static final String imgLoc = "profile_img";
 
     @SerializedName(userId)
-    private String mUserid;
+    private String mUserId;
     @SerializedName(fName)
     private String mFirstName;
     @SerializedName(lName)
@@ -24,11 +24,11 @@ public class User {
     private String mImgProfile;
 
     public String getUserId() {
-        return mUserid;
+        return mUserId;
     }
 
-    public void setUserid(String userid) {
-        mUserid = userid;
+    public void setUserId(String userId) {
+        mUserId = userId;
     }
 
     public String getFirstName() {

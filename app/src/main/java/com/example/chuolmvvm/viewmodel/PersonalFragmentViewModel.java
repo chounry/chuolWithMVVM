@@ -3,9 +3,11 @@ package com.example.chuolmvvm.viewmodel;
 import android.content.Context;
 import android.view.View;
 
+import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.api.callback.CallBackHelper;
 import com.example.chuolmvvm.api.callback.OnCallBackWithErrorBody;
 import com.example.chuolmvvm.api.datamanager.UserDataManager;
@@ -21,14 +23,26 @@ public class PersonalFragmentViewModel extends AbsBaseViewModel {
     private ObservableField<String> mEmail = new ObservableField<>();
     private ObservableField<String> mTel = new ObservableField<>();
     private ObservableField<String> mImgUrl = new ObservableField<>();
+
+    private ObservableField<String> mEditCancelTxt = new ObservableField<>();
+
     private ObservableInt mSaveBtnVisibility = new ObservableInt(View.GONE);
     private ObservableInt mProgessVisibility = new ObservableInt(View.GONE);
+    private ObservableInt mSelectImgVisibility = new ObservableInt(View.INVISIBLE);
+
+    private ObservableBoolean mFieldEnable = new ObservableBoolean(false);
 
     private UserDataManager mUserDataManager;
 
-    public PersonalFragmentViewModel(Context context, UserDataManager userDataManager) {
+    private PersonalFragmentViewModelListener mPersonalFragmentViewModelListener;
+
+    public PersonalFragmentViewModel(Context context,
+                                     UserDataManager userDataManager,
+                                     PersonalFragmentViewModelListener personalFragmentViewModelListener) {
         super(context);
+        mPersonalFragmentViewModelListener = personalFragmentViewModelListener;
         mUserDataManager = userDataManager;
+        mEditCancelTxt.set(getContext().getString(R.string.edit));
         getUser();
     }
 
@@ -45,7 +59,6 @@ public class PersonalFragmentViewModel extends AbsBaseViewModel {
             @Override
             public void onFail(Throwable throwable) {
                 Timber.e("onFail " + throwable.getMessage());
-
             }
 
             @Override
@@ -72,6 +85,31 @@ public class PersonalFragmentViewModel extends AbsBaseViewModel {
 
     }
 
+    private void enableEdit() {
+        mFieldEnable.set(true);
+        mSelectImgVisibility.set(View.VISIBLE);
+        mSaveBtnVisibility.set(View.VISIBLE);
+        mEditCancelTxt.set(getContext().getString(R.string.cancel));
+    }
+
+    private void disableEdit() {
+        mFieldEnable.set(false);
+        mSelectImgVisibility.set(View.INVISIBLE);
+        mSaveBtnVisibility.set(View.GONE);
+        mEditCancelTxt.set(getContext().getString(R.string.edit));
+    }
+
+    public void onEditClick(){
+        if(mFieldEnable.get()){
+            disableEdit();
+        }else {
+            enableEdit();
+        }
+    }
+
+    public void onBackClick(){
+        mPersonalFragmentViewModelListener.onBackClicked();
+    }
 
     public ObservableField<String> getFirstName() {
         return mFirstName;
@@ -109,23 +147,27 @@ public class PersonalFragmentViewModel extends AbsBaseViewModel {
         return mImgUrl;
     }
 
-    public void setImgUrl(ObservableField<String> imgUrl) {
-        mImgUrl = imgUrl;
-    }
-
     public ObservableInt getSaveBtnVisibility() {
         return mSaveBtnVisibility;
-    }
-
-    public void setSaveBtnVisibility(ObservableInt saveBtnVisibility) {
-        mSaveBtnVisibility = saveBtnVisibility;
     }
 
     public ObservableInt getProgessVisibility() {
         return mProgessVisibility;
     }
 
-    public void setProgessVisibility(ObservableInt progessVisibility) {
-        mProgessVisibility = progessVisibility;
+    public ObservableBoolean getFieldEnable() {
+        return mFieldEnable;
+    }
+
+    public ObservableInt getSelectImgVisibility() {
+        return mSelectImgVisibility;
+    }
+
+    public ObservableField<String> getEditCancelTxt() {
+        return mEditCancelTxt;
+    }
+
+    public interface PersonalFragmentViewModelListener{
+        void onBackClicked();
     }
 }

@@ -58,10 +58,6 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
         Timber.i("Home tag" + homeFragment.getMyTag());
         initNavHeader();
         setFragment(R.id.container_home, homeFragment, homeFragment.getMyTag());
-
-        getSupportFragmentManager().addOnBackStackChangedListener(
-                () -> Timber.e("Fragment backStack count" +
-                        getSupportFragmentManager().getBackStackEntryCount()));
     }
 
     private void initNavigation() {

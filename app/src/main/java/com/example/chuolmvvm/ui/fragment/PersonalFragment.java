@@ -1,4 +1,4 @@
-package com.example.chuolmvvm.ui.activity;
+package com.example.chuolmvvm.ui.fragment;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +10,7 @@ import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.api.ApiService;
 import com.example.chuolmvvm.api.datamanager.UserDataManager;
 import com.example.chuolmvvm.databinding.FragmentPersonalInfoBinding;
-import com.example.chuolmvvm.ui.fragment.AbsBindingFragment;
+import com.example.chuolmvvm.ui.activity.SettingActivity;
 import com.example.chuolmvvm.viewmodel.PersonalFragmentViewModel;
 
 import javax.inject.Inject;
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 import timber.log.Timber;
 
 public class PersonalFragment extends AbsBindingFragment<FragmentPersonalInfoBinding>
-implements PersonalFragmentViewModel.PersonalFragmentViewModelListener {
+        implements PersonalFragmentViewModel.PersonalFragmentViewModelListener {
     private static final String TAG = "PersonalFragment";
 
     @Inject
@@ -46,6 +46,7 @@ implements PersonalFragmentViewModel.PersonalFragmentViewModelListener {
     @Override
     public void onBackClicked() {
         Timber.e("onBackClicked");
-        getFragmentManager().popBackStack();
+        if ((SettingActivity) getActivity() != null)
+            ((SettingActivity) getActivity()).onBackClicked();
     }
 }

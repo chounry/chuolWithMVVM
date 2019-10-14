@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.databinding.ActivitySettingBinding;
+import com.example.chuolmvvm.ui.fragment.PersonalFragment;
 import com.example.chuolmvvm.ui.fragment.SettingFragment;
 import com.example.chuolmvvm.viewmodel.SettingViewModel;
 
@@ -55,5 +56,9 @@ public class SettingActivity extends AbsActivityFragment<SettingFragment, Activi
     @Override
     int getFragmentContainerId() {
         return R.id.container;
+    }
+
+    public void onBackClicked(){
+        onBackPressed();
     }
 }

@@ -33,7 +33,36 @@
                     android:elevation="4dp"
                     android:focusableInTouchMode="true"
                     android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:background="@color/transparent"
+                            android:onClick="@{v -> viewModel.onBackClick()}"
+                            android:src="@drawable/ic_keyboard_backspace" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="15dp"
+                            android:onClick="@{v -> viewModel.onEditClick()}"
+                            android:text="@{viewModel.editCancelTxt}"
+                            tools:text="Edit"
+                            android:textColor="@color/white"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+
+                </androidx.appcompat.widget.Toolbar>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -64,14 +93,15 @@
 
                     <Button
                         android:id="@+id/select_img_btn"
+                        visibility="@{viewModel.selectImgVisibility}"
                         android:layout_width="120dp"
                         android:layout_height="30dp"
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/upload_img_bg_btn"
+                        android:onClick="@{v -> viewModel.onSelectImgClick()}"
                         android:text="@string/select_image"
                         android:textAllCaps="false"
-                        android:textColor="#fff"
-                        android:onClick="@{v -> viewModel.onSelectImgClick()}"/>
+                        android:textColor="#fff" />
 
                     <Button
                         android:id="@+id/cancel_img_btn"
@@ -108,6 +138,7 @@
                             android:id="@+id/et_fname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="@{viewModel.fieldEnable}"
                             android:text="@={viewModel.firstName}"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -127,6 +158,7 @@
                             android:id="@+id/et_lname"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="@{viewModel.fieldEnable}"
                             android:text="@={viewModel.lastName}"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -146,6 +178,7 @@
                             android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="@{viewModel.fieldEnable}"
                             android:text="@={viewModel.email}"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -165,6 +198,7 @@
                             android:id="@+id/et_phone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="@{viewModel.fieldEnable}"
                             android:text="@={viewModel.tel}"
                             android:textSize="16sp" />
                     </LinearLayout>

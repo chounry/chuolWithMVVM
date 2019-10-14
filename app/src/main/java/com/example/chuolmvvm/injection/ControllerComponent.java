@@ -2,7 +2,7 @@ package com.example.chuolmvvm.injection;
 
 
 import com.example.chuolmvvm.ui.activity.HomeActivity;
-import com.example.chuolmvvm.ui.activity.PersonalFragment;
+import com.example.chuolmvvm.ui.fragment.PersonalFragment;
 import com.example.chuolmvvm.ui.fragment.SignInFragment;
 import com.example.chuolmvvm.ui.fragment.SignUpFragment;
 

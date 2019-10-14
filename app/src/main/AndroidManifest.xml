@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginRegisterActivity" />
-        <activity android:name=".ui.activity.PersonalFragment" />
+        <activity android:name=".ui.fragment.PersonalFragment" />
         <activity android:name=".ui.activity.SettingActivity" />
     </application>
 

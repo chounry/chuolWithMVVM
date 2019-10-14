@@ -56,6 +56,7 @@
     <string name="choul">Choul</string>
     <string name="about_us">About us</string>
     <string name="term_of_use_and_conditions">Term of use and conditions</string>
+    <string name="edit">Edit</string>
     <string-array name="for_sale_rent">
         <item>For Sale</item>
         <item>For Rent</item>

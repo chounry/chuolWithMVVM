@@ -47,7 +47,9 @@ public abstract class AbsBaseActivity extends ResultPermissionActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .setCustomAnimations(R.animator.slide_in_left,
-                        R.animator.slide_out_right, 0, 0)
+                        R.animator.slide_out_right,
+                        0,
+                        0)
                 .replace(id, fragment, tag)
                 .addToBackStack(null)
                 .commitAllowingStateLoss();
@@ -59,12 +61,9 @@ public abstract class AbsBaseActivity extends ResultPermissionActivity {
         ImageButton navLeftBtn = v.findViewById(R.id.nav_left_btn);
         navLeftBtn.setImageResource(icon);
 
-        navLeftBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (absBaseActiviyListener != null) {
-                    absBaseActiviyListener.onNavLeftBtnClicked();
-                }
+        navLeftBtn.setOnClickListener(v1 -> {
+            if (absBaseActiviyListener != null) {
+                absBaseActiviyListener.onNavLeftBtnClicked();
             }
         });
 

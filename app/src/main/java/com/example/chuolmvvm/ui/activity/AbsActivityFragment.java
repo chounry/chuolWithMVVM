@@ -1,11 +1,13 @@
 package com.example.chuolmvvm.ui.activity;
 
+import android.os.Bundle;
+
 import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.chuolmvvm.R;
 import com.example.chuolmvvm.ui.fragment.AbsBaseFragment;
 import com.example.chuolmvvm.ui.fragment.AbsBindingFragment;
 import com.example.chuolmvvm.ui.fragment.HomeFragment;
@@ -17,6 +19,14 @@ import timber.log.Timber;
 public abstract class AbsActivityFragment<F extends Fragment, T extends ViewDataBinding>
         extends AbsBaseActivityBinding<T> {
     private Class<F> baseFragment = (Class<F>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportFragmentManager().addOnBackStackChangedListener(
+                () -> Timber.e("Fragment backStack count " +
+                        getSupportFragmentManager().getBackStackEntryCount()));
+    }
 
     public void setFragmentOnTop(Fragment fragment, String tag, boolean needAnima) {
         FragmentManager fragmentManager = getSupportFragmentManager();
