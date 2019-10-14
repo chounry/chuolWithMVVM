@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.chuolmvvm.viewmodel.SignUpViewModel" />
@@ -29,9 +31,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={viewModel.firstName}"
+                    android:maxLines="1"
                     android:singleLine="true"
-                    android:maxLines="1" />
+                    android:text="@={viewModel.firstName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,9 +47,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={viewModel.lastName}"
+                    android:maxLines="1"
                     android:singleLine="true"
-                    android:maxLines="1" />
+                    android:text="@={viewModel.lastName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
@@ -63,8 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_email_black"
-                android:text="@={viewModel.email}"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,11 +78,11 @@
             android:hint="@string/phone_number">
 
             <EditText
-                android:text="@={viewModel.phoneNumber}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_local_phone"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:text="@={viewModel.phoneNumber}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,11 +93,11 @@
             android:hint="@string/password">
 
             <EditText
-                android:text="@={viewModel.password}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_lock_black"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={viewModel.password}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,11 +108,11 @@
             android:hint="@string/confirm_password">
 
             <EditText
-                android:text="@={viewModel.conPassword}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_lock_black"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:text="@={viewModel.conPassword}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -127,17 +129,18 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="15dp"
                 android:background="@color/colorPrimary"
-                android:text="@string/sign_up_txt"
-                android:visibility="@{viewModel.signUpBtnVisibility}"
                 android:onClick="@{()-> viewModel.onSignUpClick()}"
-                android:textColor="#fff" />
+                android:text="@string/sign_up_txt"
+                android:textColor="#fff"
+                android:visibility="@{viewModel.signUpBtnVisibility}" />
 
             <com.victor.loading.rotate.RotateLoading
                 android:id="@+id/rotateloading"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                app:loading_color="@color/colorPrimary"
                 android:visibility="@{viewModel.loadingVisibility}"
+                app:isLoading="@{viewModel.loadingVisibility}"
+                app:loading_color="@color/colorPrimary"
                 app:loading_width="2dp" />
         </LinearLayout>
 

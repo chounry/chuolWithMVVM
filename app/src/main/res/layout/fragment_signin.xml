@@ -67,6 +67,7 @@
                 android:layout_height="40dp"
                 app:loading_color="@color/colorPrimary"
                 android:visibility="@{viewModel.loadingVisibility}"
+                app:isLoading="@{viewModel.loadingVisibility}"
                 tools:visibility="visible"
                 app:loading_width="2dp" />
         </LinearLayout>
