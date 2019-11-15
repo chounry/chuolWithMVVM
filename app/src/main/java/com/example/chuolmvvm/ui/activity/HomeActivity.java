@@ -128,10 +128,7 @@ public class HomeActivity extends AbsActivityFragment<HomeFragment, ActivityHome
         if (id == R.id.nav_home) {
 
         } else if (id == R.id.item_home) {
-            if (isLogin())
-                fragment = new HomeFragment();
-            else
-                createLoginDialog();
+            fragment = new HomeFragment();
 
         } else if (id == R.id.item_chat) {
             Timber.i("Here is");
